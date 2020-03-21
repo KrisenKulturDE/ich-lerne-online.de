@@ -1,0 +1,11 @@
+.filters_component{
+    .badge{
+        text-decoration: none;
+    }
+
+    .inactive-filters{
+        .close-indicator{
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,89 @@
+.results-wrapper{
+	position: relative;
+	display: block;
+
+	.total-number{
+		margin: 8px;
+	}
+
+	.btn-group-wrapper{
+		display: block;
+		position: relative;
+		text-align: center;
+		margin: 8px;
+	}
+
+	.masonry-grid{
+
+		.masonry-grid-sizer,
+		.masonry-grid-item {
+			width: 100%;
+		}
+
+		.masonry-grid-item {
+			padding: 8px;
+		}
+
+
+		@include breakpoint('xs') {
+			.masonry-grid-sizer,
+			.masonry-grid-item {
+				width: 50%;
+			}
+		}
+
+		@include breakpoint('sm') {
+			.masonry-grid-sizer,
+			.masonry-grid-item {
+				width: 33.3%;
+			}
+		}
+
+		@include breakpoint('lg') {
+			.masonry-grid-sizer,
+			.masonry-grid-item {
+				width: 25%;
+			}
+		}
+
+		@include breakpoint('xl') {
+			.masonry-grid-sizer,
+			.masonry-grid-item {
+				width: 20%;
+			}
+		}
+	}
+}
+
+.has-sidebar{
+	.results-wrapper{
+		.masonry-grid{
+
+			.masonry-grid-sizer,
+			.masonry-grid-item {
+				width: 20%;
+			}
+
+			@include breakpoint('xl') {
+				.masonry-grid-sizer,
+				.masonry-grid-item {
+					width: 33%;
+				}
+			}
+
+			@include breakpoint('lg') {
+				.masonry-grid-sizer,
+				.masonry-grid-item {
+					width: 50%;
+				}
+			}
+
+			@include breakpoint('md') {
+				.masonry-grid-sizer,
+				.masonry-grid-item {
+					width: 100%;
+				}
+			}
+		}
+	}
+}

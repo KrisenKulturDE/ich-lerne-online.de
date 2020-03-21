@@ -1,0 +1,47 @@
+$font-path: "./../../../fonts/";
+
+/* dosis-200 - latin */
+@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 200;
+  src: url('#{$font-path}/Dosis/dosis-v17-latin-200.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('#{$font-path}/Dosis/dosis-v17-latin-200.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('#{$font-path}/Dosis/dosis-v17-latin-200.woff2') format('woff2'), /* Super Modern Browsers */
+       url('#{$font-path}/Dosis/dosis-v17-latin-200.woff') format('woff'), /* Modern Browsers */
+       url('#{$font-path}/Dosis/dosis-v17-latin-200.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('#{$font-path}/Dosis/dosis-v17-latin-200.svg#Dosis') format('svg'); /* Legacy iOS */
+}
+
+/* dosis-regular - latin */
+@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 400;
+  src: url('#{$font-path}/Dosis/dosis-v17-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('#{$font-path}/Dosis/dosis-v17-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('#{$font-path}/Dosis/dosis-v17-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('#{$font-path}/Dosis/dosis-v17-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('#{$font-path}/Dosis/dosis-v17-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('#{$font-path}/Dosis/dosis-v17-latin-regular.svg#Dosis') format('svg'); /* Legacy iOS */
+}
+
+/* dosis-700 - latin */
+@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 700;
+  src: url('#{$font-path}/Dosis/dosis-v17-latin-700.eot'); /* IE9 Compat Modes */
+  src: local(''),
+       url('#{$font-path}/Dosis/dosis-v17-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('#{$font-path}/Dosis/dosis-v17-latin-700.woff2') format('woff2'), /* Super Modern Browsers */
+       url('#{$font-path}/Dosis/dosis-v17-latin-700.woff') format('woff'), /* Modern Browsers */
+       url('#{$font-path}/Dosis/dosis-v17-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('#{$font-path}/Dosis/dosis-v17-latin-700.svg#Dosis') format('svg'); /* Legacy iOS */
+}
+
+body {
+  font-family: 'Dosis', sans-serif;
+}
