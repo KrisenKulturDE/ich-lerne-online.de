@@ -5,5 +5,5 @@ $twack = wire('modules')->get('Twack');
 $general = $twack->getNewComponent('General');
 $content = $twack->getComponent('mainContent');
 // $content->addComponent('ContentItems', ['directory' => 'contents_component', 'title' => '', 'type' => 'tiles']);
-$general->addComponent('ItemsContainerPage', ['directory' => 'pages']);
+$content->addComponent('ItemsContainerPage', ['directory' => 'pages']);
 echo $general->render();

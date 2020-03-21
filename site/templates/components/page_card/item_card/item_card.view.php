@@ -3,7 +3,7 @@ namespace ProcessWire;
 
 if ($this->page->main_image) {
     ?>
-	<div class="aspect-ratio ar-2-1 card__img">
+	<div class="aspect-ratio ar-2-1 card__img darken">
 		<?php
 			echo $this->component->getService('ImageService')->getPictureHtml(array(
 				'image'          => $this->page->main_image,
@@ -88,6 +88,7 @@ if ($this->page->main_image) {
 	</div>
 
 	<div class="margin-top-sm">
+		<span class="price-info"><?= !empty($this->page->price_info) ? $this->page->price_info : 'kostenloses Angebot'; ?></span>
 		<?php
         if (false && !empty($this->page->contents)) {
             ?>
