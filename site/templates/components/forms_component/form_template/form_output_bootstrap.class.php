@@ -103,7 +103,7 @@ class FormOutputBootstrap extends FormOutputType {
                 $fieldHtml .= '<div class="form-text">' . $this->replacePlaceholders($field->notes) . '</div>';
             }
             $fieldHtml .= '</div>';
-        } elseif ($field->type instanceof \FieldtypeRuntimeMarkup) {
+        } elseif (class_exists('\FieldtypeRuntimeMarkup') && $field->type instanceof \FieldtypeRuntimeMarkup) {
             $fieldHtml .= '<div class="form-group ' . ($isRequired ? 'required' : '') . ' ' . implode(' ', $groupClasses) . '" ' . $this->getAttributeString($groupAttributes) . '>';
             $fieldHtml .= '<label class="form-control-label">' . $field->label . '</label>';
 

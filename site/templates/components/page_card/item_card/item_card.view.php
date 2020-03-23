@@ -71,14 +71,6 @@ if ($this->page->main_image) {
 				<?php
 			}
 			?>
-			<!-- <span class="badge badge--primary">Primary</span>
-			<span class="badge badge--primary-light">Primary</span>
-			<span class="badge badge--accent">Accent</span>
-			<span class="badge badge--accent-light">Accent</span>
-			<span class="badge badge--error">Error</span>
-			<span class="badge badge--error-light">Error</span>
-			<span class="badge badge--success">Success</span>
-			<span class="badge badge--success-light">Success</span> -->
 		</div>
 	</div>
 

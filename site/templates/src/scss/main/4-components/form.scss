@@ -1,0 +1,36 @@
+.section_item_submit{
+    .form-label, .form-legend{
+        font-weight: bold;
+    }
+
+    // Hide honeypot:
+    .info-field{
+        display: none;
+    }
+
+    .alerts{
+        .alert{
+            display: block;
+            position: relative;
+            margin-bottom: 8px;
+            padding: 8px;
+
+            &:last-child{
+                margin-bottom: 0;
+            }
+
+            &.alert-danger{
+                background: var(--color-error);
+                color: #fff;
+            }
+            &.alert-success{
+                background: var(--color-success);
+                color: #fff;
+            }
+        }
+    }
+
+    .color-danger{
+        color: var(--color-error);
+    }
+}

@@ -20,6 +20,9 @@ $wire->addHookAfter('SeoMaestro::renderSeoDataValue', function (HookEvent $event
     }
 
     if ($group === 'meta' && $name === 'title') {
+        if($value === 'ich-lerne-online.org | ich-lerne-online.org'){
+            $value = 'ich-lerne-online.org';
+        }
         $event->return = htmlspecialchars(strip_tags($value));
     } elseif ($name === 'description') {
         $event->return = htmlspecialchars(trim(str_replace('&nbsp;', ' ', strip_tags($value))));
