@@ -1,6 +1,10 @@
 <section class="bg-contrast-lower article text-component">
     <?php
-    if ($this->page->text) {
+
+use ProcessWire\Pagefile;
+use ProcessWire\Pageimage;
+
+if ($this->page->text) {
         ?>
         <div class="container max-width-adaptive-lg padding-y-md content_text">
             <?= $this->page->text; ?>
@@ -220,5 +224,47 @@ if ($this->page->block_form_submission !== true) {
         </form>
     </section>
 <?php
+}
+
+if($this->page->partners->count > 0){
+    ?>
+    <div class="container margin-y-lg max-width-lg" style="text-align: center;">
+        <h2>Unsere Partner:</h2>
+        <div class="parent grid gap-0 partners-grid">
+            <?php
+            foreach($this->page->partners->shuffle() as $partner){
+                ?>
+                <div class="col col-6 col-4@sm col-3@lg padding-sm padding-md@md">
+                    <?php
+                    if($partner->main_image){
+                        ?>
+                        <div class="image-partner">
+                            <?php
+                                echo $this->component->getService('ImageService')->getPictureHtml(array(
+                                    'image'          => $partner->main_image,
+                                    'alt'            => $partner->title,
+                                    'loadAsync'      => true,
+                                    'default'        => array(
+                                        'width'  => 400
+                                    ),
+                                )); ?>
+                        </div>
+                        <?php
+                    }else{
+                        // No image available
+                        ?>
+                        <div class="text-partner">
+                            <?= $partner->title; ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
+    </div>
+    <?php
 }
 ?>
