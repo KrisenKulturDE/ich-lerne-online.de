@@ -9,5 +9,17 @@
         font-size: 2rem;
         font-weight: bold;
         line-height: 1.1;
+        color: var(--color-secondary);
+        filter: grayscale(100%);
+        transition: filter 1s;
+  
+        &:hover,
+        &:focus {
+          filter: none;
+        }
+
+        &>a{
+            text-decoration: none;
+        }
     }
 }

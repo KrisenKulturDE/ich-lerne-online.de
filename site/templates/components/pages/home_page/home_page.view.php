@@ -226,16 +226,22 @@ if ($this->page->block_form_submission !== true) {
 <?php
 }
 
-if($this->page->partners->count > 0){
+if($this->partners->count > 0){
     ?>
     <div class="container margin-y-lg max-width-lg" style="text-align: center;">
         <h2>Unsere Partner:</h2>
         <div class="parent grid gap-0 partners-grid">
             <?php
-            foreach($this->page->partners->shuffle() as $partner){
+            foreach($this->partners->shuffle() as $partner){
                 ?>
                 <div class="col col-6 col-4@sm col-3@lg padding-sm padding-md@md">
                     <?php
+                    if(!empty($partner->link)){
+                        ?>
+                        <a href="<?= $partner->link; ?>" target="_blank" rel=”nofollow”>
+                        <?php
+                    }
+
                     if($partner->main_image){
                         ?>
                         <div class="image-partner">
@@ -245,7 +251,7 @@ if($this->page->partners->count > 0){
                                     'alt'            => $partner->title,
                                     'loadAsync'      => true,
                                     'default'        => array(
-                                        'width'  => 400
+                                        'width'  => 300
                                     ),
                                 )); ?>
                         </div>
@@ -256,6 +262,12 @@ if($this->page->partners->count > 0){
                         <div class="text-partner">
                             <?= $partner->title; ?>
                         </div>
+                        <?php
+                    }
+
+                    if(!empty($partner->link)){
+                        ?>
+                        </a>
                         <?php
                     }
                     ?>
