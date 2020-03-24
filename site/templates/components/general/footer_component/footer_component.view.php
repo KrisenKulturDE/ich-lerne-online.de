@@ -8,7 +8,7 @@ namespace ProcessWire;
     <div class="container max-width-lg">
       <div class="main-footer__colophon">
         <div class="main-footer__colophon-nav">
-          <span style="color: var(--color-white)">&copy;&nbsp;2020&nbsp;gemeinschaft.online</span>
+          <h4><span style="color: var(--color-white)">&copy;&nbsp;2020&nbsp;ich-lerne-online.org<small>&nbsp;|&nbsp;Ein&nbsp;Projekt&nbsp;von&nbsp;<a href="https://krisenkultur.de">KrisenKultur</a></small></span></h4>
           <a href="/impressum">Impressum</a>
           <a href="/datenschutz">Datenschutz</a>
         </div>
@@ -29,7 +29,7 @@ namespace ProcessWire;
             </svg>
           </a>
   
-          <a href="https://www.facebook.com/Gemeinschaftonline-112470087049115/" target="_blank">
+          <a href="https://www.facebook.com/Krisenkulturde-112974000338020/" target="_blank">
             <svg class="icon" viewBox="0 0 32 32">
               <title>Folge uns auf Facebook</title><g><path d="M32,16A16,16,0,1,0,13.5,31.806V20.625H9.438V16H13.5V12.475c0-4.01,2.389-6.225,6.043-6.225a24.644,24.644,0,0,1,3.582.312V10.5H21.107A2.312,2.312,0,0,0,18.5,13v3h4.438l-.71,4.625H18.5V31.806A16,16,0,0,0,32,16Z"></path></g>
             </svg>
