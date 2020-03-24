@@ -55,6 +55,18 @@
     </div>
 </section>
 
+<?php
+if ($this->page->text2 && !empty((string) $this->page->text2)) {
+    ?>
+    <section class="bg-contrast-lower article text-component">
+        <div class="container max-width-adaptive-lg padding-y-md content_text">
+            <?= $this->page->text2; ?>
+        </div>
+    </section>
+<?php
+} 
+?>
+
 <?php 
 if ($this->page->block_form_submission !== true) {
     ?>
@@ -209,14 +221,4 @@ if ($this->page->block_form_submission !== true) {
     </section>
 <?php
 }
-
-if ($this->page->text2 && !empty((string) $this->page->text2)) {
-    ?>
-    <section class="bg-contrast-lower article text-component">
-        <div class="container max-width-adaptive-lg padding-y-md content_text">
-            <?= $this->page->text2; ?>
-        </div>
-    </section>
-<?php
-} 
 ?>
