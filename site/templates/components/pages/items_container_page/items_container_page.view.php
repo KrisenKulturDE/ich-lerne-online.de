@@ -1,16 +1,11 @@
 <?php
 namespace ProcessWire;
 ?>
-<div class="search_page results-wrapper">
-	<?php
+<div class="search_page results-wrapper margin-bottom-lg max-width-xxl">
 
-	// Output filter, if available:
-	if ($this->filters) {
-		echo $this->filters;
-	}
+	<?= !empty((string) $this->filters) ? $this->filters : ''; ?> 
 	
-	?>
-	<div class="results-container " data-request-url="<?= $this->requestUrl; ?>">
+	<div class="results-container padding-y-md">
 		<?php
 		if ($this->totalNumber) {
 			?>
@@ -22,12 +17,11 @@ namespace ProcessWire;
 		<?php
 		if ($this->childComponents && count($this->childComponents) > 0) {
 			?>
-			<div class="masonry-grid">
-				<div class="masonry-grid-sizer"></div>
+			<div class="grid gap-xs gap-sm@md items-grid">
 				<?php
 				foreach ($this->childComponents as $result) {
 					?>
-					<div class="masonry-grid-item">
+					<div class="col col-12 col-6@sm col-4@md col-3@lg">
 						<?= $result; ?>
 					</div>
 					<?php
@@ -37,10 +31,6 @@ namespace ProcessWire;
 			<?php
 		} else {
 			?>
-			<div class="masonry-grid">
-				<div class="masonry-grid-sizer"></div>
-			</div>
-	
 			<div class="alert alert-info no-results" role="alert">
 				<strong><?= __('No results found'); ?></strong><br/>
 				<?= __('Expand the filter settings to get more results.'); ?>
@@ -48,11 +38,7 @@ namespace ProcessWire;
 			<?php
 		}
 		?>
-
-		<div class="btn-group-wrapper">
-			<div class="btn-group" role="group">
-				<button type="button" class="btn btn--primary <?= !$this->moreAvailable ? 'd-none' : ''; ?>" data-action="load-more" data-offset="<?= $this->lastElementIndex + 1; ?>"><?= __('Load more...'); ?></button>
-			</div>
-		</div>
 	</div>
+
+	<?= !empty((string) $this->pagination) ? $this->pagination : ''; ?> 
 </div>

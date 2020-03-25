@@ -10,19 +10,16 @@ class ItemsContainerPage extends TwackComponent {
         if (!($containerPage instanceof Page) || !$containerPage->id) {
             return false;
         }
-        $this->requestUrl = '/api/page' . $this->page->url;
-        
+
         $selector = [];
-        if(!empty($args['selector']) && is_array($args['selector'])){
+        if (!empty($args['selector']) && is_array($args['selector'])) {
             $selector = $args['selector'];
         }
         $selector[] = ['template', ['item']];
 
         $this->selector = $selector;
 
-        $filters = array(
-            // 'charLimit' => 150
-        );
+        $filters = array();
 
         if (wire('input')->get('category')) {
             $filters['category'] = wire('input')->get('category');
@@ -46,21 +43,25 @@ class ItemsContainerPage extends TwackComponent {
         }
 
         // Is something entered in the free text search?
-        if (wire('input')->get('q')) {
-            $filters['q'] = wire('input')->get('q');
+        if (wire('input')->get->selectorValue('q')) {
+            $filters['q'] = wire('input')->get->selectorValue('q');
+        }
+
+        $this->paginationfilters = $filters;
+
+        if (wire('input')->get->int('page')) {
+            $filters['page'] = wire('input')->get->int('page');
         }
 
         $this->addComponent('FiltersComponent', [
             'directory' => 'partials',
             'name'      => 'filters',
-            'filters'   => $filters
+            'filters'   => $this->paginationfilters
         ]);
 
         $this->pagesService         = $this->getService('PagesService');
         $results                    = $this->pagesService->getResults($filters, $this->selector);
-        $this->moreAvailable        = $results->moreAvailable;
-        $this->lastElementIndex     = $results->lastElementIndex;
-        $this->totalNumber          = $results->totalNumber;
+        
         $resultPages                = $results->items;
 
         $parameters = [];
@@ -75,14 +76,15 @@ class ItemsContainerPage extends TwackComponent {
             $this->addComponent('PageCard', ['directory' => '', 'page' => $page, 'parameters' => $parameters, 'attributes' => $attributes]);
         }
 
-        $this->addScript('ajaxmasonry.js', array(
-            'path'     => wire('config')->urls->templates . 'assets/js/',
-            'absolute' => true
-        ));
-        $this->addScript('legacy/ajaxmasonry.js', array(
-            'path'     => wire('config')->urls->templates . 'assets/js/',
-            'absolute' => true
-        ));
+        $this->addComponent('PaginationComponent', [
+            'directory' => 'partials',
+            'name'      => 'pagination',
+            'results'   => $results,
+            'parameters' => [
+                'paginationfilters' => $this->paginationfilters,
+                'paginationAction' => $this->page->url
+            ]
+        ]);
     }
 
     public function getAjax($ajaxArgs = []) {

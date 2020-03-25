@@ -35,6 +35,10 @@ Usage: codyhouse.co/license
     display: block;
     width: 100%;
   }
+
+  &>.placeholder{
+    background: #ffffff;
+  }
 }
 
 .card__content {

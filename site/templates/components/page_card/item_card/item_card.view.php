@@ -1,25 +1,29 @@
 <?php
 namespace ProcessWire;
 
-if ($this->page->main_image) {
-    ?>
-	<div class="aspect-ratio ar-2-1 card__img darken">
-		<?php
-			echo $this->component->getService('ImageService')->getPictureHtml(array(
-				'image'          => $this->page->main_image,
-				'alt'            => sprintf(__('Main-image of %1$s'), $this->page->title),
-				'classes'        => array('article-image'),
-				'pictureclasses' => array('ar-content'),
-				'loadAsync'      => true,
-				'default'        => array(
-					'width'  => 320,
-					'height' => 160
-				),
-			)); ?>
-	</div>
-	<?php
-}
+
 ?>
+<div class="aspect-ratio ar-2-1 card__img darken">
+	<?php
+        if ($this->page->main_image) {
+            echo $this->component->getService('ImageService')->getPictureHtml(array(
+                'image'          => $this->page->main_image,
+                'alt'            => sprintf(__('Main-image of %1$s'), $this->page->title),
+                'classes'        => array('article-image'),
+                'pictureclasses' => array('ar-content'),
+                'loadAsync'      => true,
+                'default'        => array(
+                    'width'  => 320,
+                    'height' => 160
+                ),
+            ));
+        }else{
+			?>
+			<div class="ar-content placeholder"></div>
+			<?php
+		}
+		?>
+</div>
 
 <div class="card__content">
 	<div class="text-component">
@@ -79,7 +83,7 @@ if ($this->page->main_image) {
 		</p>
 	</div>
 
-	<div class="margin-top-sm">
+	<div class="margin-top-sm card-footer">
 		<span class="price-info"><?= !empty($this->page->price_info) ? $this->page->price_info : 'kostenloses Angebot'; ?></span>
 		<?php
         if (false && !empty($this->page->contents)) {

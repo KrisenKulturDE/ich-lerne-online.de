@@ -3,7 +3,7 @@ namespace ProcessWire;
 
 ?>
 	
-<div class="filters_component margin-bottom-md">
+<div class="filters_component margin-bottom-md max-width-xxl">
 	<div class="parent grid gap-xs">
 		<?php
 		if (!empty((string)$this->category)) {

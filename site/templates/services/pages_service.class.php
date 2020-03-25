@@ -58,23 +58,33 @@ class PagesService extends TwackComponent {
         $output->lastElementIndex = 0;
 
         $sortSelector = [];
+        if (!isset($args['limit']) || !is_int($args['limit']) || $args['limit'] < 0) {
+            $args['limit'] = 12;
+        }
+        $sortSelector[]                  = ['limit', '=', $args['limit'], 'int'];
+        $output->limit = $args['limit'];
+
+        if(isset($args['page']) && is_int($args['page']) && $args['page'] > 1){
+            $args['start'] = ($args['page'] - 1) * $args['limit'];
+        }
+
         if (isset($args['start'])) {
             $sortSelector[]                  = ['start', '=', $args['start'], 'int'];
             $output->lastElementIndex    = intval($args['start']);
+            $output->currentPage = (int) ceil((intval($args['start']) + 1) / $output->limit);
         } elseif (isset($args['offset'])) {
             $sortSelector[]                  = ['start', '=', $args['offset'], 'int'];
             $output->lastElementIndex    = intval($args['offset']);
+            $output->currentPage = (int) ceil((intval($args['offset']) + 1) / $output->limit);
         } else {
             $sortSelector[] = ['start', 0];
+            $output->currentPage = 1;
         }
 
-        if (isset($args['limit']) && $args['limit'] >= 0) {
-            $sortSelector[]                  = ['limit', '=', $args['limit'], 'int'];
-            $output->lastElementIndex    = $output->lastElementIndex + intval($args['limit']);
-        } elseif (!isset($args['limit'])) {
-            $sortSelector[]                  = ['limit', 12];
-            $output->lastElementIndex    = $output->lastElementIndex + 12;
-        }
+        $output->lastElementIndex    = (int) $output->lastElementIndex + intval($args['limit']);
+        $output->pagesCount = (int) ceil($output->totalNumber / $output->limit);
+
+        // Twack::devEcho($output);
 
         $results = $results->find($sortSelector);
 
