@@ -30,6 +30,12 @@ class PagesService extends TwackComponent {
                 }
     
                 if (is_array($args[$fieldname])) {
+                    if($fieldname === 'subjects'){
+                        $args[$fieldname][] = '1074';
+                    }else if($fieldname === 'school_types'){
+                        $args[$fieldname][] = '1073';
+                    }
+                    
                     $selector[] = [$fieldname, $args[$fieldname]];
                 }
             }
@@ -84,7 +90,7 @@ class PagesService extends TwackComponent {
         $output->lastElementIndex    = (int) $output->lastElementIndex + intval($args['limit']);
         $output->pagesCount = (int) ceil($output->totalNumber / $output->limit);
 
-        // Twack::devEcho($output);
+        // Twack::devEcho($selector);
 
         $results = $results->find($sortSelector);
 

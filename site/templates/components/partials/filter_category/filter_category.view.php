@@ -13,7 +13,7 @@ if ($this->options->count > 0) {
 			</summary>
 			<div class="inactive-filters details__content text-component margin-top-xs js-details__content flex flex-wrap gap-xxs">
 				<?php
-				foreach ($this->options->find('active=0') as $option) {
+				foreach ($this->options->find('active=0, sort=title') as $option) {
 					?>
 					<a data-id="<?= $option->id; ?>" href="<?= $option->urlWithParams; ?>" class="tag badge badge--success">
 						<?= $option->title; ?> <span class="close-indicator">&times;</span>
@@ -27,7 +27,7 @@ if ($this->options->count > 0) {
 			<label style="display: block; font-size: var(--text-sm);"><?= __('Selected Categories:'); ?></label>
 			<?php
 			if (count($this->options->find('active=1')) > 0) {
-				foreach ($this->options->find('active=1') as $option) {
+				foreach ($this->options->find('active=1, sort=title') as $option) {
 					?>
 					<a data-id="<?= $option->id; ?>" href="<?= $option->urlWithParams; ?>"
 					class="active tag badge badge--success">
