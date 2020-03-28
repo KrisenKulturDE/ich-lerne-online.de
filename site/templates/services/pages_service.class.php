@@ -18,7 +18,7 @@ class PagesService extends TwackComponent {
         if (isset($args['sort'])) {
             $selector[] = ['sort', $args['sort']];
         } else {
-            $selector[] = ['sort', '-datetime_from'];
+            $selector[] = ['sort', '-created'];
         }
 
         // Filtering by keywords:

@@ -18,39 +18,41 @@ class FiltersComponent extends TwackComponent {
         if(!empty($args['filters']) && is_array($args['filters'])){
             $filters = $args['filters'];
         }
-        if(isset($filters['q'])){
-            unset($filters['q']);
+
+        $searchfilters = $filters;
+        if(isset($searchfilters['q'])){
+            unset($searchfilters['q']);
         }
 
         $this->searchAction = $this->page->url;
-        $this->searchfilters = $filters;
+        $this->searchfilters = $searchfilters;
 
         // Kategorien-Filter
         $this->addComponent('FilterCategory', [
             'directory' => 'partials', 
             'name' => 'category', 
-            'active' => (!empty($args['filters']) && is_array($args['filters']) ? $args['filters'] : [])
+            'active' => $filters
         ]);
 
         // Schulformen-Filter
         $this->addComponent('FilterSchoolType', [
             'directory' => 'partials', 
             'name' => 'schoolTypes', 
-            'active' => (!empty($args['filters']) && is_array($args['filters']) ? $args['filters'] : [])
+            'active' => $filters
         ]);
 
         // Fächer-Filter
         $this->addComponent('FilterSubject', [
             'directory' => 'partials', 
             'name' => 'subjects', 
-            'active' => (!empty($args['filters']) && is_array($args['filters']) ? $args['filters'] : [])
+            'active' => $filters
         ]);
 
         // Schlagwörter-Filter
         $this->addComponent('FilterTags', [
             'directory' => 'partials', 
             'name' => 'tags', 
-            'active' => (!empty($args['filters']) && is_array($args['filters']) ? $args['filters'] : [])
+            'active' => $filters
         ]);
     }
 }

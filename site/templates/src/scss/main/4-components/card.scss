@@ -8,6 +8,7 @@ Usage: codyhouse.co/license
 -------------------------------- */
 
 .card {
+  position: relative;
   background-color: var(--color-bg);
   box-shadow: var(--shadow-sm);
   border-radius: var(--radius-md);
@@ -108,4 +109,8 @@ Usage: codyhouse.co/license
 
 .card--is-link:hover .card__link-icon {
   opacity: 1;
+}
+
+.card-footer{
+  position: relative;
 }

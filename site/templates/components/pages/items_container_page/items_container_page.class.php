@@ -59,6 +59,72 @@ class ItemsContainerPage extends TwackComponent {
             'filters'   => $this->paginationfilters
         ]);
 
+        $this->activeSort = 'relevance';
+        if (wire('input')->get('sort')) {
+            $this->activeSort = wire('input')->get('sort');
+        }
+
+        $sortfilters = $filters;
+        if(isset($sortfilters['sort'])){
+            unset($sortfilters['sort']);
+        }
+        $this->sortfilters = $sortfilters;
+
+        $sortOptions = [
+            [
+                'label' => $this->_('Relevance'),
+                'value' => '-relevance_factor',
+                'key' => 'relevance'
+            ],
+            // [
+            //     'label' => $this->_('Popularity'),
+            //     'value' => '-likes_amount, -views_amount',
+            //     'key' => 'popularity'
+            // ],
+            [
+                'label' => $this->_('Newest first'),
+                'value' => '-created',
+                'key' => 'newest'
+            ],
+            [
+                'label' => $this->_('Oldest first'),
+                'value' => 'created',
+                'key' => 'oldest'
+            ],
+            [
+                'label' => $this->_('Alphabetical A-Z'),
+                'value' => 'title',
+                'key' => 'a-z'
+            ],
+            [
+                'label' => $this->_('Alphabetical Z-A'),
+                'value' => '-title',
+                'key' => 'z-a'
+            ]
+        ];
+        
+        foreach($sortOptions as &$option){
+            $optionFilters = $this->sortfilters;
+            $optionFilters['sort'] = $option['key'];
+            $option['url'] = $this->page->url . '?' . http_build_query($optionFilters);  
+            $option['active'] = false; 
+
+            if(is_string($this->activeSort) && $this->activeSort === $option['key']){
+                $option['active'] = true;
+                $this->activeSort = $option;
+            }
+        }
+        if(empty($this->activeSort) || !is_array($this->activeSort)){
+            $this->activeSort = [
+                'label' => $this->_('Relevance'),
+                'value' => '-relevance_factor',
+                'key' => 'relevance'
+            ];
+        }
+        $filters['sort'] = $this->activeSort['value'];
+        
+        $this->sortOptions = $sortOptions;
+
         $this->pagesService         = $this->getService('PagesService');
         $results                    = $this->pagesService->getResults($filters, $this->selector);
         
@@ -67,6 +133,14 @@ class ItemsContainerPage extends TwackComponent {
         $parameters = [];
         if (!empty($args['cardClasses'])) {
             $parameters['classes'] = $args['cardClasses'];
+        }
+
+        $this->csrfTkn = [];
+		if (wire('modules')->isInstalled('LikesCounter')) {
+            $module = wire('modules')->get('LikesCounter');
+        	$this->csrfTkn = $module->getCSRFToken();
+        }else{
+            $this->csrfTkn = $this->wire('session')->CSRF->getToken();
         }
 
         foreach ($resultPages as $page) {

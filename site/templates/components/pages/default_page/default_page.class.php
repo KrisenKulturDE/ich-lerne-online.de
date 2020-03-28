@@ -64,6 +64,12 @@ class DefaultPage extends TwackComponent {
 		if ($this->page->template->hasField('contents')) {
 			$this->contents = $this->addComponent('ContentsComponent', ['directory' => '']);
 		}
+
+		if (wire('modules')->isInstalled('LikesCounter')) {
+            $module = wire('modules')->get('LikesCounter');
+       		$module->trackView($this->page);
+        }
+        
 	}
 
 	public function getAjax($ajaxArgs = []) {

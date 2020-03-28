@@ -39,6 +39,7 @@ yarn.lock
 !/site/modules/PageAccessApplications
 !/site/modules/PageAccessPermissions
 !/site/modules/PageAccessReleasetime
+!/site/modules/LikesCounter
 
 /*.html
 /bin

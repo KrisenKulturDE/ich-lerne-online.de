@@ -4,13 +4,19 @@ namespace ProcessWire;
 class ItemCard extends TwackComponent {
 
 	public function __construct($args) {
-		parent::__construct($args);
+        parent::__construct($args);
 
-		$this->date = $this->page->created;
-		if($this->page->template->hasField('datetime_from')){
-			$this->date = $this->page->getUnformatted('datetime_from');
-		}
-	}
+        $this->date = $this->page->created;
+        if ($this->page->template->hasField('datetime_from')) {
+            $this->date = $this->page->getUnformatted('datetime_from');
+        }
+
+        $this->likeStatus = false;
+        if (wire('modules')->isInstalled('LikesCounter')) {
+            $module           = wire('modules')->get('LikesCounter');
+            $this->likeStatus = $module->likeStatus($this->page);
+        }
+    }
 
 	public function getAjax($ajaxArgs = []){
 		$output = $this->getAjaxOf($this->page);

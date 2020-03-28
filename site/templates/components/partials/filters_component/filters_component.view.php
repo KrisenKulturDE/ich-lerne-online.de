@@ -3,18 +3,8 @@ namespace ProcessWire;
 
 ?>
 	
-<div class="filters_component margin-bottom-md max-width-xxl">
+<div class="filters_component max-width-xxl">
 	<div class="parent grid gap-xs">
-		<?php
-		if (!empty((string)$this->category)) {
-			?>
-			<div class="col col-12 col-6@xs col-4@md margin-bottom-md">
-				<?= $this->category; ?>
-			</div>
-			<?php
-		}
-		?>
-
 		<?php
 		if (!empty((string)$this->schoolTypes)) {
 			?>
@@ -30,6 +20,16 @@ namespace ProcessWire;
 			?>
 			<div class="col col-12 col-6@xs col-4@md margin-bottom-md">
 				<?= $this->subjects; ?>
+			</div>
+			<?php
+		}
+		?>
+
+		<?php
+		if (!empty((string)$this->category)) {
+			?>
+			<div class="col col-12 col-6@xs col-4@md margin-bottom-md">
+				<?= $this->category; ?>
 			</div>
 			<?php
 		}

@@ -32,6 +32,20 @@
 		}
 	}
 
+	.sort-wrapper{
+		display: flex;
+		width: 100%;
+		position: relative;
+		justify-content: flex-end;
+		align-items: center;
+
+		button{
+			background-color: transparent; 
+			box-shadow: none;
+			align-self: flex-end;
+		}
+	}
+
 	.btn-group-wrapper{
 		display: block;
 		position: relative;

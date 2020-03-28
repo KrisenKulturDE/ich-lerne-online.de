@@ -1,0 +1,82 @@
+.like-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 0 none;
+  outline: none;
+  padding-top: 16px;
+  background: transparent;
+
+  & > .icon {
+    cursor: pointer;
+    padding: 2px;
+    position: relative;
+    background: #fff;
+    border-radius: 50%;
+    display: block;
+    color: #aaa;
+    transition: 0.2s;
+    width: 32px;
+    height: 32px;
+    z-index: 2;
+
+    &:hover {
+      color: #fec120;
+    }
+  }
+
+  & > .message {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    transition: 0.6s;
+    z-index: 1;
+    font-size: 2px;
+    color: transparent;
+    font-weight: 400;
+  }
+
+  &.active {
+    & > .icon {
+      animation: size 0.4s;
+      color: transparent;
+      background-image: url("../../../img/star.svg");
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    & > .message {
+      bottom: 36px;
+      font-size: 12px;
+      visibility: visible;
+      animation: fade 1s;
+    }
+  }
+
+  @keyframes fade {
+    0% {
+      color: transparent;
+    }
+    50% {
+      color: #fec120;
+    }
+    100% {
+      // color: transparent;
+    }
+  }
+
+  @keyframes size {
+    0% {
+      padding: 10px 12px 8px;
+    }
+    50% {
+      padding: 14px 16px 12px;
+      margin-top: -4px;
+    }
+    100% {
+      padding: 10px 12px 8px;
+    }
+  }
+}

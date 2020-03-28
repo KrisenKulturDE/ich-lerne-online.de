@@ -12,7 +12,7 @@ class FilterSubject extends TwackComponent {
 		}
 		$this->filters = $filters;
 
-		$activeCategories = [];
+		$activeSubjects = [];
 		if (isset($args['active']['subjects'])) {
 			// Active keywords were transferred.
 			if (is_string($args['active']['subjects'])) {
@@ -23,21 +23,21 @@ class FilterSubject extends TwackComponent {
 				foreach (array_keys($args['active']['subjects'], "") as $k) {
 					unset($args['active']['subjects'][$k]); // Remove empty elements
 				}
-				$activeCategories = $args['active']['subjects'];
+				$activeSubjects = $args['active']['subjects'];
 			}
 		}
-		$this->activeCategories = $activeCategories;
+		$this->activeSubjects = $activeSubjects;
 
 		$options = $this->wire('pages')->find('template.name=subject');
 		foreach($options as &$option){
-			$option->active = in_array($option->id, $this->activeCategories);
+			$option->active = in_array($option->id, $this->activeSubjects);
 
 			if ($option->active) {
 				// The selected keyword is active, so it should be removed when you click on it.
-				$option->idsOnClick = array_diff($this->activeCategories, [$option->id]);
+				$option->idsOnClick = array_diff($this->activeSubjects, [$option->id]);
 			} else {
 				// The selected keyword is not active, but there are active keywords. When clicking, the keyword must be added.
-				$active = $this->activeCategories;
+				$active = $this->activeSubjects;
 				$active[] = $option->id;
 				$option->idsOnClick = $active;
 			}
