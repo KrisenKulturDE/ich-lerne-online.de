@@ -58,9 +58,9 @@ namespace ProcessWire;
             }
         }
         ?>
-
-		<?= $this->component->getGlobalComponent('footer'); ?>
 	</div>
+
+	<?= $this->component->getGlobalComponent('footer'); ?>
 
 	<?= $this->component->getInlineStyles(); ?>
 

@@ -1,0 +1,18 @@
+.content_gallery_grid{
+	margin-top: 32px;
+
+	.grid{
+		margin-top: 8px;
+		margin-bottom: 32px;
+	}
+
+	.masonry-grid {
+		& > .masonry-grid-item {
+
+			& > a {
+				display: block;
+				width: 100%;
+			}
+		}
+	}
+}

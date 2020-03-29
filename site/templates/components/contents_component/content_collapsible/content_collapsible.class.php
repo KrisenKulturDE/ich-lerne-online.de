@@ -43,9 +43,7 @@ class ContentCollapsible extends TwackComponent {
 
 	protected function generateTabs(PageArray $tabs) {
 		foreach ($tabs as $tab) {
-			if ($tab->type == 'freetext') {
-				$this->addTab($tab->title_html, $tab->freetext);
-			}
+			$this->addTab($tab->title, $tab->text);
 		}
 	}
 

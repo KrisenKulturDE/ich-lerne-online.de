@@ -4,7 +4,7 @@ namespace ProcessWire;
 
 if ($this->page->image) {
     ?>
-	<div class="content_image single_image" <?= $this->page->depth ? 'data-depth="' . $this->page->depth . '"' : ''; ?>>
+	<div class="content_image single_image text-component__block" <?= $this->page->depth ? 'data-depth="' . $this->page->depth . '"' : ''; ?>>
 		<?php
         if (!empty($this->page->title)) {
             $headingDepth = 2;
@@ -17,26 +17,27 @@ if ($this->page->image) {
 			<?php
         } ?>
 
-		<a class="image-wrapper no-underline <?= !empty($this->page->classes . '') ? $this->page->classes : ''; ?>" data-open-imagelightbox="<?= $this->page->image->url; ?>" href="<?= $this->page->image->url; ?>" target="_blank">
-            <?php
-            echo $this->component->getService('ImageService')->getPictureHtml(array(
-                'image' => $this->page->image,
-                'pictureclasses' => array('ar-content'),
-                'loadAsync' => true,
-                'default' => array(
-                    'width' => 800
-                ),
-                'media' => array(
-                    '(max-width: 500px)' => array(
-                        'width' => 500
+        <a class="image-wrapper no-underline <?= !empty($this->page->classes . '') ? $this->page->classes : ''; ?>" data-open-imagelightbox="<?= $this->page->image->url; ?>" href="<?= $this->page->image->url; ?>" target="_blank">
+            <figure class="text-component__block">
+                <?php
+                echo $this->component->getService('ImageService')->getPictureHtml(array(
+                    'image' => $this->page->image,
+                    'loadAsync' => true,
+                    'default' => array(
+                        'width' => 800
+                    ),
+                    'media' => array(
+                        '(max-width: 500px)' => array(
+                            'width' => 500
+                        )
                     )
-                )
-            ));
+                ));
 
-            if ($this->page->image->caption && !empty($this->page->image->caption . '')) {
-                echo '<div class="image-caption">' . $this->page->image->caption . '</div>';
-            } 
-        ?>
+                if ($this->page->image->caption && !empty($this->page->image->caption . '')) {
+                    echo '<figcaption>' . $this->page->image->caption . '</figcaption>';
+                } 
+                ?>
+            </figure>
 		</div>
     </a>
 	<?php

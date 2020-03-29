@@ -4,7 +4,7 @@ namespace ProcessWire;
 
 if ($this->tabs && count($this->tabs) > 0) {
     ?>
-	<div class="content_collapsible <?= !empty($this->page->classes . '') ? $this->page->classes : ''; ?>" <?= $this->page->depth ? 'data-depth="' . $this->page->depth . '"' : ''; ?>>
+	<div class="content_collapsible margin-y-md text-component__block <?= !empty($this->page->classes . '') ? $this->page->classes : ''; ?>" <?= $this->page->depth ? 'data-depth="' . $this->page->depth . '"' : ''; ?>>
 		<?php
         if (!empty($this->title)) {
             $headingDepth = 2;
@@ -15,29 +15,27 @@ if ($this->tabs && count($this->tabs) > 0) {
 				<?= $this->title; ?>
 			</h<?= $headingDepth; ?>>
 			<?php
-        } ?>
-		<div class="collapsible-element" id="<?= $this->id; ?>">
+		} ?>
+
+		<ul class="accordion accordion--icon-plus js-accordion" data-animation="on" data-multi-items="on" id="<?= $this->id; ?>" style="list-style-type: none;">
 			<?php
             foreach ($this->tabs as $tab) {
-                ?>
-				<div class="card">
-					<div class="card-header bg-dark" id="heading-<?= $tab->id; ?>">
-						<a data-toggle="collapse" data-target="#<?= $tab->id; ?>" data-parent="#<?= $this->id; ?>" href="#<?= $tab->id; ?>" aria-controls="<?= $tab->id; ?>" data-expanded="false">
-							<h2 class="collapsible-label">
-								<?= $tab->title; ?>
-							</h2>
-						</a>
-					</div>
+				?>
+				  <li class="accordion__item js-accordion__item">
+					<button class="reset accordion__header padding-y-sm padding-x-md js-tab-focus" type="button" id="heading-<?= $tab->id; ?>" aria-controls="<?= $tab->id; ?>">
+						<span class="text-md"><?= $tab->title; ?></span>
+						<em aria-hidden="true" class="accordion__icon-wrapper"><i></i></em>
+					</button>
 
-					<div id="<?= $tab->id; ?>" class="collapse" role="tabpanel" aria-labelledby="heading-<?= $tab->id; ?>" data-parent="#<?= $this->id; ?>">
-						<div class="card-block">
+					<div id="<?= $tab->id; ?>" class="accordion__panel js-accordion__panel" aria-labelledby="heading-<?= $tab->id; ?>">
+						<div class="text-component padding-top-xxxs padding-x-md padding-bottom-md">
 							<?= $tab->content; ?>
 						</div>
 					</div>
-				</div>
+				</li>
 				<?php
             } ?>
-		</div>
+		</ul>
 	</div>
 	<?php
 }

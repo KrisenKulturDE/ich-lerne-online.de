@@ -39,26 +39,6 @@ class DefaultPage extends TwackComponent {
 			}
 		}
 
-		if ($this->page->template->hasField('datetime_from') && !empty($this->page->datetime_from)) {
-			$this->datetime_unformatted = $this->page->getUnformatted('datetime_from');
-			$this->publishTimeString = date('d.m.Y', $this->datetime_unformatted);
-
-
-			if ($this->page->template->hasField('datetime_until')) {
-				// Time-until field exists: Probably event, i.e. output time as well
-				$this->publishTimeString .= sprintf($this->_('On %1$s'), date('d.m.Y, H:m', $this->datetime_unformatted));
-				if (!empty($this->page->datetime_until)) {
-					$this->datetime_bis_unformatted = $this->page->getUnformatted('datetime_until');
-					if (date('d.m.Y', $this->datetime_unformatted) == date('d.m.Y', $this->page->getUnformatted('datetime_until'))) {
-						// Same day, add time only
-						$this->publishTimeString = sprintf('On %1$s - %2$s', date('d.m.Y, H:m', $this->datetime_unformatted), date('H:m', $this->datetime_until_unformatted));
-					} else {
-						$this->publishTimeString = sprintf('On %1$s until %2$s', date('d.m.Y, H:m', $this->datetime_unformatted), date('d.m.Y, H:m', $this->datetime_until_unformatted));
-					}
-				}
-			}
-		}
-
 		$this->tags = $this->addComponent('tagsField', ['directory' => 'partials', 'name' => 'tags']);
 
 		if ($this->page->template->hasField('contents')) {

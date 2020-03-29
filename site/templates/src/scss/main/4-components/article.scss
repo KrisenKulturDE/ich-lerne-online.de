@@ -6,68 +6,12 @@ article,
   --heading-line-height: 1.1;
   --body-line-height: 1.4;
 
+  .main_image{
+    position: relative;
+    display: block;
+  }
+
   .tags {
     margin-bottom: 8px;
-  }
-
-  .main_image {
-    display: block;
-    margin-bottom: 24px;
-    max-width: 100%;
-    width: 670px;
-  }
-
-  .contents-container {
-    display: block;
-    position: relative;
-
-    & > :first-child {
-      margin-top: 0;
-      padding-top: 0;
-    }
-
-    .content_items {
-      margin-top: 64px;
-
-      .items_carousel {
-        margin-top: 8px;
-      }
-    }
-  }
-
-  .intro,
-  .content-block p,
-  .content-block blockquote,
-  .content-block > .content_collapsible {
-    max-width: 100%;
-    width: 38em;
-  }
-
-  .title {
-    margin-top: 4px;
-    margin-bottom: 24px;
-    display: block;
-    width: 16em;
-    max-width: 100%;
-    hyphens: auto;
-  }
-  .intro {
-    margin-bottom: 32px;
-    font-weight: bold;
-  }
-
-  .contents_component {
-    .content_gallery {
-      width: auto;
-    }
-  }
-
-  .content_text {
-    &>*:first-child{
-      margin-top: 0;
-    }
-    &>*:last-child{
-      margin-bottom: 0;
-    }
   }
 }

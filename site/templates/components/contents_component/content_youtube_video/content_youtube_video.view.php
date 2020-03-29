@@ -3,7 +3,7 @@
 namespace ProcessWire;
 
 ?>
-<div class="content_youtube_video video-element aspect-ratio ar-16-9 <?= !empty($this->page->classes . '') ? $this->page->classes : ''; ?>" <?= $this->page->depth ? 'data-depth="' . $this->page->depth . '"' : ''; ?> data-youtube-id="<?= $this->page->short_text; ?>">
+<div class="content_youtube_video video-element margin-y-md text-component__block aspect-ratio ar-16-9 <?= !empty($this->page->classes . '') ? $this->page->classes : ''; ?>" <?= $this->page->depth ? 'data-depth="' . $this->page->depth . '"' : ''; ?> data-youtube-id="<?= $this->page->short_text; ?>">
     <div class="placeholder ar-content">
         <?php
             if ($this->page->image) {

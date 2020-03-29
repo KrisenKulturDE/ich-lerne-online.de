@@ -1,6 +1,30 @@
-
 @import "./fonts";
 
-.d-none{
-    display: none!important;
+.d-none {
+  display: none !important;
+}
+
+.main-content {
+  a:not(.btn):not(.nav-link):not(.no-underline):not(.pagination__item),
+  .btn-link {
+    color: var(--color-black);
+    text-decoration-color: var(--color-primary);
+    text-decoration-thickness: 0.125em;
+    text-underline-offset: 1.5px;
+    transition: color 0.2s;
+
+    &:hover,
+    &:focus {
+      color: var(--color-primary);
+    }
+  }
+}
+
+.no-underline {
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
 }

@@ -297,7 +297,7 @@ class LikesCounter extends WireData implements Module {
 
         $relevanceFactor = (int) $boost + $views;
         $relevanceFactor += $likes * 2;
-        if ($boost !== 0) {
+        if (is_integer($boost) && $boost !== 0) {
             $relevanceFactor *= $boost;
         }
 

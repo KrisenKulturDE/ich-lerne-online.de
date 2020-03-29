@@ -1,7 +1,11 @@
 <?php
 namespace ProcessWire;
 ?>
-<div class="search_page results-wrapper margin-bottom-lg max-width-xxl">
+<div class="search_page results-wrapper margin-y-lg container max-width-adaptive-lg container">
+	<?= $this->breadcrumbs; ?>
+	<h1 class="title margin-bottom-xs">
+		<?= $this->page->title; ?>
+	</h1>
 
 	<?= !empty((string) $this->filters) ? $this->filters : ''; ?> 
 	

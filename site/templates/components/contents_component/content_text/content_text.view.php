@@ -3,7 +3,7 @@
 namespace ProcessWire;
 
 ?>
-<div class="content_text text-component <?= !empty($this->page->classes . '') ? $this->page->classes : ''; ?>" <?= $this->page->depth ? 'data-depth="' . $this->page->depth . '"' : ''; ?>>
+<div class="content_text <?= !empty($this->page->classes . '') ? $this->page->classes : ''; ?>" <?= $this->page->depth ? 'data-depth="' . $this->page->depth . '"' : ''; ?>>
 	<?php
     if (!empty($this->page->title)) {
         $headingDepth = 2;

@@ -11,6 +11,8 @@ class ItemsContainerPage extends TwackComponent {
             return false;
         }
 
+        $this->breadcrumbs = $this->addComponent('BreadcrumbsComponent', ['name' => 'breadcrumbs', 'directory' => 'partials']);
+
         $selector = [];
         if (!empty($args['selector']) && is_array($args['selector'])) {
             $selector = $args['selector'];
