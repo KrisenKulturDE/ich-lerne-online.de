@@ -8,7 +8,7 @@
 # -----------------------------------------------------------------------------------------------
 # If you never modified your previous .htaccess file, then you can simply replace it with this
 # one. If you have modified your .htaccess file, then you will want to copy/paste some updates
-# to the old one instead:
+# to the old one instead
 
 # If your htaccess/index version is 300, upgrade to this version by replacing all of sections #5
 # and #15 (Access Restrictions). Also take a look at section #9, which you might also consider 

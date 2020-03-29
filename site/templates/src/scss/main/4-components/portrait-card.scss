@@ -1,0 +1,26 @@
+.portrait-card {
+  line-height: 1.2;
+
+  .portrait-header{
+    position: relative;
+    display: block;
+    margin-top: 8px;
+  }
+
+  .portrait-title {
+    margin-bottom: 4px;
+    margin-top: 0;
+    font-size: var(--text-md,1.30em);
+    font-weight: bold;
+  }
+  .portrait-role {
+    position: relative;
+    display: block;
+    line-height: 1.4;
+    color: #999;
+    font-size: 14px;
+  }
+  .portrait-text{
+      font-size: 16px;
+  }
+}
