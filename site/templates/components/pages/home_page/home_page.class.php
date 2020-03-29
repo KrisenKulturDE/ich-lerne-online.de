@@ -13,8 +13,6 @@ class HomePage extends TwackComponent {
         $this->targetAudiences = $this->wire('pages')->find('template.name=target_audience');
         $this->categoryOptions = $this->wire('pages')->find('template.name=category, sort=title');
 
-        $this->partners = $this->wire('pages')->find('template.name=partner');
-
         if ($this->page->block_form_submission !== true) {
             $this->setTemplate(wire('templates')->get(44));
 

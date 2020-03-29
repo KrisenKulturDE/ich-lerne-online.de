@@ -1,10 +1,12 @@
+<?php
+namespace ProcessWire;
+
+
+?>
+
 <section class="bg-contrast-lower article text-component">
     <?php
-
-use ProcessWire\Pagefile;
-use ProcessWire\Pageimage;
-
-if ($this->page->text) {
+    if ($this->page->text) {
         ?>
         <div class="container max-width-adaptive-lg padding-y-md content_text">
             <?= $this->page->text; ?>
@@ -18,7 +20,8 @@ if ($this->page->text) {
     <div class="epkb-doc-search-container padding-sm text-center" >
         <h2 class="epkb-doc-search-container__title" style="color: #686862; font-size: 36px;"> Suche</h2>
 
-        <form id="epkb_search_form margin-auto" class="epkb-search epkb-search-form-1" method="get" action="<?= $this->searchAction; ?>">
+        <form id="epkb_search_form margin-auto" class="epkb-se
+        arch epkb-search-form-1" method="get" action="<?= $this->searchAction; ?>">
             <div class="search-input search-input--icon-right" style="width: 80%; margin: 16px auto;">
                 <input class="form-control width-100%" type="search" name="q" placeholder="Suchen..." aria-label="Search">
                 <button class="search-input__btn">
@@ -226,13 +229,67 @@ if ($this->page->block_form_submission !== true) {
 <?php
 }
 
-if($this->partners->count > 0){
+if($this->page->partners && $this->page->partners->count > 0){
     ?>
     <div class="container margin-y-lg max-width-lg" style="text-align: center;">
-        <h2>Unsere Partner:</h2>
+        <h2><?= __('Our partners:'); ?></h2>
         <div class="parent grid gap-0 partners-grid">
             <?php
-            foreach($this->partners->shuffle() as $partner){
+            foreach($this->page->partners->shuffle() as $partner){
+                ?>
+                <div class="col col-6 col-4@sm col-3@lg padding-sm padding-md@md">
+                    <?php
+                    if(!empty($partner->link)){
+                        ?>
+                        <a href="<?= $partner->link; ?>" target="_blank" rel=”nofollow”>
+                        <?php
+                    }
+
+                    if($partner->main_image){
+                        ?>
+                        <div class="image-partner">
+                            <?php
+                                echo $this->component->getService('ImageService')->getPictureHtml(array(
+                                    'image'          => $partner->main_image,
+                                    'alt'            => $partner->title,
+                                    'loadAsync'      => true,
+                                    'default'        => array(
+                                        'width'  => 300
+                                    ),
+                                )); ?>
+                        </div>
+                        <?php
+                    }else{
+                        // No image available
+                        ?>
+                        <div class="text-partner">
+                            <?= $partner->title; ?>
+                        </div>
+                        <?php
+                    }
+
+                    if(!empty($partner->link)){
+                        ?>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
+    </div>
+    <?php
+}
+
+if($this->page->supporters && $this->page->supporters->count > 0){
+    ?>
+    <div class="container margin-y-lg max-width-lg" style="text-align: center;">
+        <h2><?= __('Our supporters:'); ?></h2>
+        <div class="parent grid gap-0 partners-grid">
+            <?php
+            foreach($this->page->supporters->shuffle() as $partner){
                 ?>
                 <div class="col col-6 col-4@sm col-3@lg padding-sm padding-md@md">
                     <?php
