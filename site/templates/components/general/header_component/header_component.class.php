@@ -7,10 +7,5 @@ class HeaderComponent extends TwackComponent {
 		parent::__construct($args);
 
 		$headerPage = wire('pages')->get('template=header');
-
-		// main image:
-		$this->logo = $headerPage->main_image;
-
-		
 	}
 }

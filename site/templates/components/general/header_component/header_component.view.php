@@ -9,17 +9,7 @@ namespace ProcessWire;
       <div class="header__logo">
         <a href="<?= (string) wire('pages')->get(1)->httpUrl; ?>">
           <img width="200" src="<?= wire('config')->urls->templates; ?>assets/static/ich-lerne-online-logo.svg" class="header-logo">
-          <?php
-              // echo $this->component->getService('ImageService')->getPictureHtml(array(
-              //     'image'     => $this->logo,
-              //     'loadAsync' => false,
-              //     'classes' => 'header-logo',
-              //     'default'   => array(
-              //         'width' => 200
-              //     )
-              // )); 
-              ?>
-          </a>
+        </a>
       </div>
 
       <div class="hide@md">

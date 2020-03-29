@@ -1,0 +1,18 @@
+.main-footer {
+  .main-footer__logo {
+    a,
+    img,
+    svg {
+      width: 300px;
+      max-width: 95%;
+      height: auto;
+      display: block;
+    }
+  }
+
+  .main-footer__nav-list {
+    a {
+      text-decoration: none;
+    }
+  }
+}
