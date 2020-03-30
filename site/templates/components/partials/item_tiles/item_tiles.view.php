@@ -2,53 +2,22 @@
 
 namespace ProcessWire;
 
-// Output filter, if available:
-if ($this->filters) {
-    echo $this->filters;
-}
-
 ?>
-<div class="item_tiles results-container margin-top-sm" data-request-url="<?= $this->requestUrl; ?>">
-	<?php
-    if ($this->totalNumber) {
-        ?>
-		<i class="total-number"><?= sprintf(_n("One item found", "%d items found", $this->totalNumber), $this->totalNumber); ?></i>
-		<?php
-    }
-    ?>
-
+<div class="item_tiles results-container margin-top-sm" data-request-url="<?= $this->requestUrl; ?>" data-tknname="<?= $this->csrfTkn['name']; ?>" data-tknvalue="<?= $this->csrfTkn['value']; ?>">
 	<?php
     if ($this->childComponents && count($this->childComponents) > 0) {
         ?>
-		<div class="masonry-grid">
-			<div class="masonry-grid-sizer"></div>
+		<div class="grid gap-xs gap-sm@md items-grid">
 			<?php
-            foreach ($this->childComponents as $item) {
-                ?>
-				<div class="masonry-grid-item">
-					<?= $item; ?>
+			foreach ($this->childComponents as $result) {
+				?>
+				<div class="col col-12 col-6@sm col-4@md col-3@xxl">
+					<?= $result; ?>
 				</div>
 				<?php
-            } ?>
-		</div>
-
-		<?php
-    } else {
-        ?>
-		<div class="masonry-grid">
-			<div class="masonry-grid-sizer"></div>
-		</div>
-
-		<div class="alert alert-info no-results" role="alert">
-			<strong><?= __('No items found'); ?></strong><br/>
-			<?= __('Expand the filter settings to get more results.'); ?>
+			} ?>
 		</div>
 		<?php
     }
 	?>
-	<div class="btn-group-wrapper">
-		<div class="btn-group" role="group">
-			<button type="button" class="btn btn-primary <?= !$this->moreAvailable ? 'd-none' : ''; ?>" data-action="load-more" data-offset="<?= $this->lastElementIndex + 1; ?>"><?= __('Load more...'); ?></button>
-		</div>
-	</div>
 </div>

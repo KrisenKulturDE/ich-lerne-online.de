@@ -19,7 +19,7 @@ class ItemsService extends TwackComponent {
      * Returns all knowledge-items that can be output on this page.
      * @return PageArray
      */
-    public function getItems($args = array()) {
+    public function getResults($args = array()) {
         return $this->getService('PagesService')->getResults($args, [['template', 'item']]);
     }
 

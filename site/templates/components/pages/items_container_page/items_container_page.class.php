@@ -13,14 +13,6 @@ class ItemsContainerPage extends TwackComponent {
 
         $this->breadcrumbs = $this->addComponent('BreadcrumbsComponent', ['name' => 'breadcrumbs', 'directory' => 'partials']);
 
-        $selector = [];
-        if (!empty($args['selector']) && is_array($args['selector'])) {
-            $selector = $args['selector'];
-        }
-        $selector[] = ['template', ['item']];
-
-        $this->selector = $selector;
-
         $filters = array();
 
         if (wire('input')->get('category')) {
@@ -127,8 +119,8 @@ class ItemsContainerPage extends TwackComponent {
         
         $this->sortOptions = $sortOptions;
 
-        $this->pagesService         = $this->getService('PagesService');
-        $results                    = $this->pagesService->getResults($filters, $this->selector);
+        $this->itemsService         = $this->getService('ItemsService');
+        $results                    = $this->itemsService->getResults($filters);
         
         $resultPages                = $results->items;
 

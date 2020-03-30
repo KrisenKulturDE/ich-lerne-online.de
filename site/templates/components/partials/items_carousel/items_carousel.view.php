@@ -3,7 +3,7 @@ namespace ProcessWire;
 
 if ($this->childComponents && count($this->childComponents) > 0) {
 	?>
-	<div class="items_carousel">
+	<div class="items_carousel" data-tknname="<?= $this->csrfTkn['name']; ?>" data-tknvalue="<?= $this->csrfTkn['value']; ?>">
 		<div class="swiper-container" data-align="<?= $this->sliderAlign; ?>">
 			<div class="swiper-wrapper">
 				<?php
@@ -22,10 +22,6 @@ if ($this->childComponents && count($this->childComponents) > 0) {
 			<!-- Navigation -->
 			<div class="swiper-button-next swiper-button-black"></div>
 			<div class="swiper-button-prev swiper-button-black"></div>
-		</div>
-		<div>
-			<br/>
-			<a href="<?= $this->itemsPage->httpUrl; ?>" class="btn btn-primary"><?= __('All knowledge items'); ?></a>
 		</div>
 	</div>
 	<?php

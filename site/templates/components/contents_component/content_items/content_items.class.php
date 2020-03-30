@@ -7,8 +7,12 @@ class ContentItems extends TwackComponent {
         parent::__construct($args);
 
         $contents = '';
-        if (isset($args['type']) && $args['type'] == 'tiles') {
+        if ((isset($args['type']) && $args['type'] == 'carousel_mini') || ($this->page->template->hasField('view_type') && $this->page->view_type->id === 2)) {
+            $contents = $this->addComponent('ItemsCarousel', ['directory' => 'partials', 'cardClasses' => 'result-card', 'miniCards' => true]);
+        }else if ((isset($args['type']) && $args['type'] == 'tiles') || ($this->page->template->hasField('view_type') && $this->page->view_type->id === 3)) {
             $contents = $this->addComponent('ItemTiles', ['directory' => 'partials', 'cardClasses' => 'result-card']);
+        }else if ((isset($args['type']) && $args['type'] == 'tiles_mini') || ($this->page->template->hasField('view_type') && $this->page->view_type->id === 4)) {
+            $contents = $this->addComponent('ItemTiles', ['directory' => 'partials', 'cardClasses' => 'result-card', 'miniCards' => true]);
         } else {
             $contents = $this->addComponent('ItemsCarousel', ['directory' => 'partials', 'cardClasses' => 'result-card']);
         }
@@ -20,7 +24,7 @@ class ContentItems extends TwackComponent {
         }
 
         // The title can be set by $args or by field "title":
-        $this->title = $this->_('Knowledge Items');
+        $this->title = '';
         if (isset($args['title'])) {
             $this->title = $args['title'];
         } elseif ($this->page->template->hasField('title') && !empty($this->page->title)) {

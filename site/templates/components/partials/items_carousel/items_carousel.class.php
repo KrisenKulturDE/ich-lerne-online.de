@@ -6,20 +6,31 @@ class ItemsCarousel extends TwackComponent {
 	public function __construct($args) {
 		parent::__construct($args);
 
-		$itemsService = $this->getService('ItemsService');
-		$news = $itemsService->getArticles(['charLimit' => 150, 'limit' => 15]);
-		$itemPages = $news->items;
+		if(!$this->page->template->hasField('items') || $this->page->items->count <= 0){
+            throw new ComponentNotInitializedException('ItemsCarousel', 'No items found');
+        }
+
+		$this->csrfTkn = [];
+		if (wire('modules')->isInstalled('LikesCounter')) {
+            $module = wire('modules')->get('LikesCounter');
+        	$this->csrfTkn = $module->getCSRFToken();
+        }else{
+            $this->csrfTkn = $this->wire('session')->CSRF->getToken();
+        }
 
 		$parameters = [];
         if(!empty($args['cardClasses'])){
             $parameters['classes'] = $args['cardClasses'];
         }
 
-		foreach ($itemPages as $page) {
-			$this->addComponent('PageCard', ['directory' => '', 'page' => $page, 'parameters' => $parameters]);
+		foreach ($this->page->items as $page) {
+			$this->addComponent('PageCard', [
+				'directory' => '', 
+				'page' => $page, 
+				'parameters' => $parameters, 
+				'mini' => (isset($args['miniCards']) && !!$args['miniCards'])
+			]);
 		}
-
-		$this->itemsPage = $itemsService->getContainerPage();
 
 		$this->addScript('swiper.js', array(
             'path'     => wire('config')->urls->templates . 'assets/js/',

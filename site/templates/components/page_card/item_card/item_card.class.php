@@ -9,7 +9,9 @@ class ItemCard extends TwackComponent {
         $this->date = $this->page->created;
         if ($this->page->template->hasField('datetime_from')) {
             $this->date = $this->page->getUnformatted('datetime_from');
-        }
+		}
+		
+		$this->mini = isset($args['mini']) && !!$args['mini'];
 
         $this->likeStatus = false;
         if (wire('modules')->isInstalled('LikesCounter')) {
