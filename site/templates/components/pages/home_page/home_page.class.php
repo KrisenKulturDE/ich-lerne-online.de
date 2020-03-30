@@ -6,9 +6,12 @@ class HomePage extends TwackComponent {
         parent::__construct($args);
 
         $this->targetAudiences = $this->wire('pages')->find('template.name=target_audience');
-        $this->textteaserSectionPage = $this->wire('pages')->get(1175);
         $this->containerPage = $this->wire('pages')->find('template.name=items_container')->first();
         $this->searchAction = $this->containerPage->url;
+
+        if ($this->page->template->hasField('contents')) {
+			$this->contents = $this->addComponent('ContentsComponent', ['directory' => '']);
+		}
 
         $this->targetAudiences = $this->wire('pages')->find('template.name=target_audience');
         $this->categoryOptions = $this->wire('pages')->find('template.name=category, sort=title');

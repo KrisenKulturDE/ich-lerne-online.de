@@ -63,18 +63,24 @@ namespace ProcessWire;
 </section>
 
 <?php
-if ($this->page->text2 && !empty((string) $this->page->text2)) {
+if ($this->childComponents) {
     ?>
     <section class="bg-contrast-lower article text-component">
-        <div class="container max-width-adaptive-lg padding-y-md content_text">
-            <?= $this->page->text2; ?>
+        <div class="container max-width-adaptive-lg padding-y-sm">
+            <?php
+            foreach ($this->childComponents as $component) {
+                try {
+                    echo $component;
+                } catch (\Exception $e) {
+                    Twack::devEcho($e->getMessage());
+                }
+            } 
+            ?>
         </div>
     </section>
 <?php
 } 
-?>
 
-<?php 
 if ($this->page->block_form_submission !== true) {
     ?>
     <section class="section_item_submit container max-width-sm padding-md" id="formular">
