@@ -11,7 +11,7 @@ $wire->addHookAfter('SeoMaestro::renderSeoDataValue', function (HookEvent $event
     // Insert default values if empty:
     if (empty($value)) {
         if ($name === 'image') {
-            $value = '/site/templates/assets/static/ich-lerne-online-logo.jpg';
+            $value = 'https://ich-lerne-online.org/site/templates/assets/static/ich-lerne-online-logo.jpg';
             $event->return = $value;
         } elseif ($group === 'meta' && $name === 'description') {
             $value = 'Sammlung von Links, Tools, Tutorials, Tipps und Tricks, um ins Online-Lehren und Lernen einzusteigen und einen Überblick über E-Learning Angebote zu bekommen.';
