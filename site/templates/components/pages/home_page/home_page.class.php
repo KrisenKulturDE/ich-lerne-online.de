@@ -8,6 +8,7 @@ class HomePage extends TwackComponent {
         $this->targetAudiences = $this->wire('pages')->find('template.name=target_audience');
         $this->containerPage = $this->wire('pages')->find('template.name=items_container')->first();
         $this->searchAction = $this->containerPage->url;
+        $this->totalCount = $this->wire('pages')->count('template.name=item');
 
         if ($this->page->template->hasField('contents')) {
 			$this->contents = $this->addComponent('ContentsComponent', ['directory' => '']);

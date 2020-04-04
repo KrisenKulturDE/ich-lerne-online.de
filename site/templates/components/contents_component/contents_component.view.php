@@ -4,7 +4,7 @@ namespace ProcessWire;
 if (wireCount($this->childComponents) > 0) {
 	?>
 	<div class="contents_component margin-y-lg">
-		<div class="content-block max-width-adaptive-sm">
+		<div class="content-block max-width-adaptive-md">
 			<?php
 			$firstFlag = true;
 			$subelementActiveFlag = false;
@@ -32,31 +32,31 @@ if (wireCount($this->childComponents) > 0) {
 					$subelementActiveFlag = true;
 
 					// The width of the bootstrap columns is determined from the grid_width field at the RepeaterMatrix element:
-					$bootstrapClasses = 'col col-12 col-12 col-6@md';
+					$gridClasses = 'col col-12 col-12 col-6@md';
 					if ($page->template->hasField('grid_width') && $page->grid_width && is_object($page->grid_width->first()) && $page->grid_width->first()->id) {
 						$id = $page->grid_width->first()->id;
 						if ($id == 2) {
 							// half
-							$bootstrapClasses = 'col col-12 col-6@md';
+							$gridClasses = 'col col-12 col-6@md';
 						} elseif ($id == 3) {
 							// One third
-							$bootstrapClasses = 'col col-12 col-6@md col-4@lg';
+							$gridClasses = 'col col-12 col-6@md col-4@lg';
 						} elseif ($id == 4) {
 							// Two thirds
-							$bootstrapClasses = 'col col-12 col-6@md col-8@lg';
+							$gridClasses = 'col col-12 col-6@md col-8@lg';
 						} elseif ($id == 5) {
 							// A quarter
-							$bootstrapClasses = 'col col-12 col-6@md col-3@lg';
+							$gridClasses = 'col col-12 col-6@md col-3@lg';
 						} elseif ($id == 6) {
 							// Two quarters
-							$bootstrapClasses = 'col col-12 col-6@md col-6@lg';
+							$gridClasses = 'col col-12 col-6@md col-6@lg';
 						} elseif ($id == 7) {
 							// Three quarters
-							$bootstrapClasses = 'col col-12 col-6@md col-9@lg';
+							$gridClasses = 'col col-12 col-6@md col-9@lg';
 						}
 					}
 
-					echo "<div class=\"incontenthalt-sub-block {$bootstrapClasses}\">";
+					echo "<div class=\"content-sub-block {$gridClasses}\">";
 					echo $contentComponent;
 					echo "</div>";
 				} else {

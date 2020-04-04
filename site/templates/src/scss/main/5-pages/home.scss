@@ -1,0 +1,8 @@
+.t-home{
+    .contents_component{
+        &>.content-block{
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}

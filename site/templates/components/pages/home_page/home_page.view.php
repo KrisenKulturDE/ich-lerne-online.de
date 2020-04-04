@@ -17,20 +17,21 @@ namespace ProcessWire;
 </section>
 
 <section class="secion_target_audiences container max-width-sm padding-md">
-    <div class="epkb-doc-search-container padding-sm text-center" >
+    <div class="epkb-doc-search-container padding-sm text-center margin-bottom-sm" >
         <h2 class="epkb-doc-search-container__title" style="color: #686862; font-size: 36px;"> Suche</h2>
 
         <form id="epkb_search_form margin-auto" class="epkb-se
         arch epkb-search-form-1" method="get" action="<?= $this->searchAction; ?>">
-            <div class="search-input search-input--icon-right" style="width: 80%; margin: 16px auto;">
+            <div class="search-input search-input--icon-right" style="width: 80%; margin: 16px auto 8px auto;">
                 <input class="form-control width-100%" type="search" name="q" placeholder="Suchen..." aria-label="Search">
                 <button class="search-input__btn">
                     <svg class="icon" viewBox="0 0 24 24"><title>Submit</title><g stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" stroke="currentColor" fill="none" stroke-miterlimit="10"><line x1="22" y1="22" x2="15.656" y2="15.656"></line><circle cx="10" cy="10" r="8"></circle></g></svg>
                 </button>
             </div>
+            <a href="<?= $this->searchAction; ?>" style="font-size: var(--text-sm); color: #686862;">Insgesamt <?= $this->totalCount; ?> Beiträge</a>
         </form>
-
     </div>
+    
     <div class="parent grid gap-md margin-bottom-md">
         <?php
         foreach ($this->targetAudiences as $audience) {
@@ -50,9 +51,13 @@ namespace ProcessWire;
                 <div class="card__content bg-contrast-lower">
                     <div class="text-component">
                         <h4><?= $audience->title; ?></h4>
-                        <?php if(!empty($audience->intro)){ ?>
+                        <?php 
+                        if(!empty($audience->intro)){ 
+                            ?>
                             <p class="text-sm color-contrast-medium"><?= $audience->intro; ?></p>
-                        <?php } ?>
+                            <?php 
+                        } 
+                        ?>
                     </div>
                 </div>
             </a>
@@ -60,6 +65,32 @@ namespace ProcessWire;
         }
         ?>
     </div>
+    
+    <?php 
+    if($this->page->template->hasField('filters') && $this->page->filters->count > 0){
+        ?>
+        <div class="featured-filters text-align-center">
+            <?php
+            foreach($this->page->filters as $filter){
+                $url = $this->searchAction;
+                if($filter->template->name === 'category'){
+                    $url .= '?' . http_build_query(['category' => [$filter->id]]);
+                }else if($filter->template->name === 'school_type'){
+                    $url .= '?' . http_build_query(['school_types' => [$filter->id]]);
+                }else if($filter->template->name === 'subject'){
+                    $url .= '?' . http_build_query(['subjects' => [$filter->id]]);
+                }else if($filter->template->name === 'tag'){
+                    $url .= '?' . http_build_query(['tags' => [$filter->id]]);
+                }
+                ?>
+                <a class="btn btn--primary btn--sm" style="margin-bottom: 4px;" href="<?= $url; ?>" title="<?= $filter->template->label; ?>: <?= $filter->title; ?>"><?= $filter->title; ?></a>
+                <?php
+            }
+            ?>
+        </div>
+        <?php
+    }
+    ?>
 </section>
 
 <?php
@@ -243,7 +274,7 @@ if($this->page->partners && $this->page->partners->count > 0){
             <?php
             foreach($this->page->partners->shuffle() as $partner){
                 ?>
-                <div class="col col-6 col-4@sm col-3@lg padding-sm padding-md@md">
+                <div class="col col-12 col-6@sm col-4@lg padding-xs padding-sm@lg padding-md@xl">
                     <?php
                     if(!empty($partner->link)){
                         ?>
