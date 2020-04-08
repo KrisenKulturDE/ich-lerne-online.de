@@ -17,4 +17,15 @@ class PaginationComponent extends TwackComponent {
         $this->pagesCount           = $args['results']->pagesCount;
         $this->currentPage          = $args['results']->currentPage;
     }
+
+    public function getAjax($ajaxArgs = []) {
+        return [
+            'moreAvailable' => $this->moreAvailable,
+            'lastElementIndex' => $this->lastElementIndex,
+            'totalNumber' => $this->totalNumber,
+            'limit' => $this->limit,
+            'pagesCount' => $this->pagesCount,
+            'currentPage' => $this->currentPage
+        ];
+    }
 }

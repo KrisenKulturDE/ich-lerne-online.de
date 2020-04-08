@@ -12,7 +12,7 @@ namespace ProcessWire;
             <?= $this->page->text; ?>
         </div>
     <?php
-    } 
+    }
     ?>
 </section>
 
@@ -31,7 +31,7 @@ namespace ProcessWire;
             <a href="<?= $this->searchAction; ?>" style="font-size: var(--text-sm); color: #686862;">Insgesamt <?= $this->totalCount; ?> Beiträge</a>
         </form>
     </div>
-    
+
     <div class="parent grid gap-md margin-bottom-md">
         <?php
         foreach ($this->targetAudiences as $audience) {
@@ -51,12 +51,12 @@ namespace ProcessWire;
                 <div class="card__content bg-contrast-lower">
                     <div class="text-component">
                         <h4><?= $audience->title; ?></h4>
-                        <?php 
-                        if(!empty($audience->intro)){ 
+                        <?php
+                        if(!empty($audience->intro)){
                             ?>
                             <p class="text-sm color-contrast-medium"><?= $audience->intro; ?></p>
-                            <?php 
-                        } 
+                            <?php
+                        }
                         ?>
                     </div>
                 </div>
@@ -65,8 +65,8 @@ namespace ProcessWire;
         }
         ?>
     </div>
-    
-    <?php 
+
+    <?php
     if($this->page->template->hasField('filters') && $this->page->filters->count > 0){
         ?>
         <div class="featured-filters text-align-center">
@@ -105,12 +105,12 @@ if ($this->childComponents) {
                 } catch (\Exception $e) {
                     Twack::devEcho($e->getMessage());
                 }
-            } 
+            }
             ?>
         </div>
     </section>
 <?php
-} 
+}
 
 if ($this->page->block_form_submission !== true) {
     ?>
@@ -149,17 +149,17 @@ if ($this->page->block_form_submission !== true) {
                 <label class="form-label margin-bottom-xxxs" for="inputEmail">Deine Email-Adresse</label>
                 <input class="form-control width-100%" type="email" name="sender_email" id="inputEmail" <?= $this->component->getErrorMsg('sender_email') ? 'aria-invalid="true"' : ''; ?> value="<?= !$this->component->shouldClearFormFields() && $this->component->getCurrentValue('sender_email') ? $this->component->getCurrentValue('sender_email') : ''; ?>">
                 <?= $this->component->getErrorMsg('sender_email') ? '<p class="text-xs color-danger margin-bottom-sm">' . $this->component->getErrorMsg('sender_email') . '</p>' : ''; ?>
-                
+
             </div>
 
             <div class="margin-bottom-md">
-                <label class="form-label margin-bottom-xxxs" for="inputTitle">Titel des Inhalts</label> 
+                <label class="form-label margin-bottom-xxxs" for="inputTitle">Titel des Inhalts</label>
                 <input class="form-control width-100%" type="text" name="title" id="inputTitle" <?= $this->component->getErrorMsg('title') ? 'aria-invalid="true"' : ''; ?> value="<?= !$this->component->shouldClearFormFields() && $this->component->getCurrentValue('title') ? $this->component->getCurrentValue('title') : ''; ?>">
                 <?= $this->component->getErrorMsg('title') ? '<p class="text-xs color-danger margin-bottom-sm">' . $this->component->getErrorMsg('title') . '</p>' : ''; ?>
             </div>
 
             <div class="margin-bottom-md">
-                <label class="form-label margin-bottom-xxxs" for="inputLink">Link zum Inhalt</label> 
+                <label class="form-label margin-bottom-xxxs" for="inputLink">Link zum Inhalt</label>
                 <input class="form-control width-100%" type="text" name="link" id="inputLink" <?= $this->component->getErrorMsg('link') ? 'aria-invalid="true"' : ''; ?> value="<?= !$this->component->shouldClearFormFields() && $this->component->getCurrentValue('link') ? $this->component->getCurrentValue('link') : ''; ?>">
                 <?= $this->component->getErrorMsg('link') ? '<p class="text-xs color-danger margin-bottom-sm">' . $this->component->getErrorMsg('link') . '</p>' : ''; ?>
             </div>
@@ -214,7 +214,7 @@ if ($this->page->block_form_submission !== true) {
             </div>
 
             <div class="margin-bottom-md">
-                <label class="form-label margin-bottom-xxxs" for="inputReason">Warum soll genau dieser Eintrag in unsere Liste aufgenommen werden?</label> 
+                <label class="form-label margin-bottom-xxxs" for="inputReason">Warum soll genau dieser Eintrag in unsere Liste aufgenommen werden?</label>
                 <textarea class="form-control width-100%" name="sender_reason" id="inputReason" <?= $this->component->getErrorMsg('sender_reason') ? 'aria-invalid="true"' : ''; ?>><?= !$this->component->shouldClearFormFields() && $this->component->getCurrentValue('sender_reason') ? $this->component->getCurrentValue('sender_reason') : ''; ?></textarea>
                 <?= $this->component->getErrorMsg('sender_reason') ? '<p class="text-xs color-danger margin-bottom-sm">' . $this->component->getErrorMsg('sender_reason') . '</p>' : ''; ?>
             </div>

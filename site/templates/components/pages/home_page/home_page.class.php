@@ -1,8 +1,11 @@
 <?php
+
 namespace ProcessWire;
 
-class HomePage extends TwackComponent {
-    public function __construct($args) {
+class HomePage extends TwackComponent
+{
+    public function __construct($args)
+    {
         parent::__construct($args);
 
         $this->targetAudiences = $this->wire('pages')->find('template.name=target_audience');
@@ -11,8 +14,8 @@ class HomePage extends TwackComponent {
         $this->totalCount = $this->wire('pages')->count('template.name=item');
 
         if ($this->page->template->hasField('contents')) {
-			$this->contents = $this->addComponent('ContentsComponent', ['directory' => '']);
-		}
+            $this->contents = $this->addComponent('ContentsComponent', ['directory' => '']);
+        }
 
         $this->targetAudiences = $this->wire('pages')->find('template.name=target_audience');
         $this->categoryOptions = $this->wire('pages')->find('template.name=category, sort=title');
@@ -30,19 +33,23 @@ class HomePage extends TwackComponent {
         }
     }
 
-    protected function regenerateAntispamCode() {
+    protected function regenerateAntispamCode()
+    {
         wire('session')->set('antispam_code_' . $this->formOrigin, mt_rand(1000, 9999));
     }
 
-    protected function clearAntispamCode() {
+    protected function clearAntispamCode()
+    {
         wire('session')->remove('antispam_code_' . $this->formOrigin);
     }
 
-    public function getAntispamCode() {
+    public function getAntispamCode()
+    {
         return wire('session')->get('antispam_code_' . $this->formOrigin);
     }
 
-    public function getCurrentValue($fieldname){
+    public function getCurrentValue($fieldname)
+    {
         if (!empty($this->evaluationResponse['fields'][$fieldname]) && is_array($this->evaluationResponse['fields'][$fieldname])) {
             if (isset($this->evaluationResponse['fields'][$fieldname]['currentValue'])) {
                 return $this->evaluationResponse['fields'][$fieldname]['currentValue'];
@@ -51,7 +58,8 @@ class HomePage extends TwackComponent {
         return false;
     }
 
-    public function getErrorMsg($fieldname){
+    public function getErrorMsg($fieldname)
+    {
         if (!empty($this->evaluationResponse['fields'][$fieldname]) && is_array($this->evaluationResponse['fields'][$fieldname])) {
             if (!empty($this->evaluationResponse['fields'][$fieldname]['error']) && is_array($this->evaluationResponse['fields'][$fieldname]['error'])) {
                 return implode(', ', $this->evaluationResponse['fields'][$fieldname]['error']);
@@ -60,7 +68,8 @@ class HomePage extends TwackComponent {
         return false;
     }
 
-    public function getSuccessMsg($fieldname){
+    public function getSuccessMsg($fieldname)
+    {
         if (!empty($this->evaluationResponse['fields'][$fieldname]) && is_array($this->evaluationResponse['fields'][$fieldname])) {
             if (!empty($this->evaluationResponse['fields'][$fieldname]['success']) && is_array($this->evaluationResponse['fields'][$fieldname]['error'])) {
                 return implode(', ', $this->evaluationResponse['fields'][$fieldname]['success']);
@@ -69,14 +78,16 @@ class HomePage extends TwackComponent {
         return false;
     }
 
-    public function shouldClearFormFields(){
+    public function shouldClearFormFields()
+    {
         return is_array($this->evaluationResponse) && $this->evaluationResponse['status'] === true;
     }
 
     /**
      * Responds to POST requests that match this form ID.
      */
-    protected function evaluateRequest() {
+    protected function evaluateRequest()
+    {
         // A post-request of this modal is to be processed
 
         // Collection of all errors that occurred in the form:
@@ -119,7 +130,7 @@ class HomePage extends TwackComponent {
 
             $newRequest            = new Page();
             $newRequest->template  = $this->template; // "item"-template
-            $newRequest->addStatus(Page::statusUnpublished); 
+            $newRequest->addStatus(Page::statusUnpublished);
             $values                = [];
 
             foreach ($this->fields as $fieldParams) {
@@ -210,12 +221,12 @@ class HomePage extends TwackComponent {
         $output['success']['finished']   = $this->_('Your request was processed successfully.');
 
         $recipients = [];
-        if($this->page->template->hasField('user_reference')){
-            foreach($this->page->user_reference as $u){
-                if(empty((string)$u->email)){
+        if ($this->page->template->hasField('user_reference')) {
+            foreach ($this->page->user_reference as $u) {
+                if (empty((string) $u->email)) {
                     continue;
                 }
-                $recipients[] = (string)$u->email;
+                $recipients[] = (string) $u->email;
             }
         }
         if (!empty($recipients)) {
@@ -240,7 +251,8 @@ class HomePage extends TwackComponent {
         return $output;
     }
 
-    protected function setTemplate(Template $template) {
+    protected function setTemplate(Template $template)
+    {
         $this->fields   = new WireArray();
         $this->template = $template;
 
@@ -255,7 +267,7 @@ class HomePage extends TwackComponent {
                     continue;
                 }
 
-                if(!$field->type instanceof FieldtypeText && !$field->type instanceof FieldtypeInteger && !$field->type instanceof FieldtypePage){
+                if (!$field->type instanceof FieldtypeText && !$field->type instanceof FieldtypeInteger && !$field->type instanceof FieldtypePage) {
                     continue;
                 }
 
@@ -270,5 +282,42 @@ class HomePage extends TwackComponent {
                 Twack::devEcho($e->getMessage());
             }
         }
+    }
+
+    /*
+    $output['target_audience'] = $this->getAjaxOf($this->page->target_audience);
+    $output['school_types'] = $this->getAjaxOf($this->page->school_types);
+    $output['subjects'] = $this->getAjaxOf($this->page->subjects);
+    $output['category'] = $this->getAjaxOf($this->page->category);
+    $output['tags'] = $this->getAjaxOf($this->page->tags);
+    */
+
+    public function getAjax($ajaxArgs = []) {
+		$output = array(
+            'title' => $this->title,
+            'target_audiences' => [],
+            'school_types' => [],
+            'subjects' => [],
+            'categories' => [],
+            'tags' => []
+        );
+
+        foreach(wire('pages')->find('template.name=target_audience') as $p){
+            $output['target_audiences'][] = $this->getAjaxOf($p);
+        }
+        foreach(wire('pages')->find('template.name=school_type') as $p){
+            $output['school_types'][] = $this->getAjaxOf($p);
+        }
+        foreach(wire('pages')->find('template.name=subject') as $p){
+            $output['subjects'][] = $this->getAjaxOf($p);
+        }
+        foreach(wire('pages')->find('template.name=category') as $p){
+            $output['categories'][] = $this->getAjaxOf($p);
+        }
+        foreach(wire('pages')->find('template.name=tag') as $p){
+            $output['tags'][] = $this->getAjaxOf($p);
+        }
+
+        return $output;
     }
 }

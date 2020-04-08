@@ -47,6 +47,10 @@ class ItemsContainerPage extends TwackComponent {
             $filters['page'] = wire('input')->get->int('page');
         }
 
+        if (wire('input')->get->int('limit')) {
+            $filters['limit'] = wire('input')->get->int('limit');
+        }
+
         $this->addComponent('FiltersComponent', [
             'directory' => 'partials',
             'name'      => 'filters',
@@ -156,6 +160,56 @@ class ItemsContainerPage extends TwackComponent {
     }
 
     public function getAjax($ajaxArgs = []) {
-        return $this->pagesService->getAjax(['selector' => $this->selector]);
+        $output = array(
+			'title' => $this->title
+		);
+
+		if (!empty($this->datetime_unformatted)) {
+			$output['datetime_from'] = $this->datetime_unformatted;
+		}
+
+		if (!empty($this->datetime_until_unformatted)) {
+			$output['datetime_until'] = $this->datetime_until_unformatted;
+		}
+
+		if (!empty($this->intro)) {
+			$output['intro'] = $this->intro;
+		}
+
+		if (!empty($this->page->main_image)) {
+			$output['main_image'] = $this->getAjaxOf($this->page->main_image);
+		}
+
+		if (!empty($this->authors)) {
+			$output['authors'] = $this->authors;
+		}
+
+		if ($this->tags && $this->tags instanceof TwackComponent) {
+			$tagAjax = $this->tags->getAjax($ajaxArgs);
+			if(!empty($tagAjax)){
+				$output['tags'] = $tagAjax;
+			}
+		}
+
+		if ($this->contents && $this->contents instanceof TwackComponent) {
+			$output['contents'] = $this->contents->getAjax($ajaxArgs);
+        }
+        
+        $pagination = $this->getComponent('pagination');
+        if($pagination && !($pagination instanceof TwackNullComponent)){
+            $output = array_merge($output, $pagination->getAjax($ajaxArgs));
+        }
+
+		// The component is registered under the global name "mainContent". From the template files some components are added manually.
+        $output['items'] = [];
+        if ($this->childComponents) {
+			foreach ($this->childComponents as $component) {
+				$ajax = $component->getAjax($ajaxArgs);
+				if(empty($ajax)) continue;
+                $output['items'][] = $ajax;
+			}
+        }
+
+		return $output;
     }
 }
